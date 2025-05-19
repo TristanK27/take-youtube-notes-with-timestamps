@@ -39,13 +39,25 @@ exportBtn.addEventListener("mousedown", (event) => {
 importBtn.addEventListener("mousedown", (event) => {
   importNotes.click();
 });
-copyBtn.addEventListener("mousedown", async (event) => {
-  let id = currentMarkingHtml.value;
+
+copyBtn.addEventListener("mousedown", async () => {
+  let id = prompt(
+    "Enter the id of the source you wish to copy notes from.\n" +
+    "(Example: dQw4w9WgXcQ is the id of the video url below)\n" +
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "dQw4w9WgXcQ"
+  )
+  if (!id) return;
+
   let storedInfo = await browser.storage.local.get(id);
-  if (!storedInfo[Object.keys(storedInfo)[0]]) return;
+  if (!storedInfo[Object.keys(storedInfo)[0]]) {
+    alert(`Couldn't find any notes for id "${id}"`);
+    return;
+  };
   let shouldCopy = confirm(
+    "THIS WILL OVERWRITE THE NOTES FOR THIS VIDEO!!\n\n" +
     "Are you sure you want to copy: " +
-      storedInfo[Object.keys(storedInfo)[0]].slice(0, 2000)
+    storedInfo[Object.keys(storedInfo)[0]].slice(0, 2000)
   );
   if (!shouldCopy) return;
   markingsHtml.innerHTML = "";
