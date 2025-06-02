@@ -69,15 +69,15 @@ copyBtn.addEventListener("mousedown", async () => {
 
 markingsHtml.addEventListener("mousedown", (event) => {
   if (event.which === 1 && event.target.classList.contains("title")) {
-    let time = parseFloat(event.target.dataset.time);
+    let markingId = parseFloat(event.target.dataset.id);
     markings.forEach((marking) => {
-      if (marking.time == time) {
+      if (marking.id == markingId) {
         if (event.ctrlKey) {
           let shouldDelete = confirm(
             "Are you sure you want to delete: " + marking.title
           );
           if (!shouldDelete) return;
-          markings = markings.filter((marking) => marking.time != time);
+          markings = markings.filter((marking) => marking.id != markingId);
         } else if (event.shiftKey) {
           let newTitle = prompt("New title for: " + marking.title);
           if (newTitle) {
@@ -99,9 +99,9 @@ markingsHtml.addEventListener("mousedown", (event) => {
     event.preventDefault();
     event.target.checked = !event.target.checked;
     let canExplain = event.target.checked;
-    let time = parseFloat(event.target.dataset.time);
+    let markingId = parseFloat(event.target.dataset.id);
     markings.forEach((marking) => {
-      if (marking.time == time) {
+      if (marking.id == markingId) {
         marking.canExplain = canExplain;
       }
     });
@@ -153,6 +153,7 @@ currentMarkingHtml.addEventListener("keyup", async (event) => {
       canExplain: false,
       title: currentMarkingHtml.value,
       time: timeStartWritingMarking,
+      id: markings.length
     });
     markings.sort(function (x, y) {
       if (x.time > y.time) {
@@ -215,12 +216,13 @@ function setVideoTime(seconds) {
   });
 }
 
-function createMarking(value, seconds, canExplain) {
+function createMarking(value, seconds, canExplain, id) {
   var checkbox = document.createElement("INPUT");
   checkbox.checked = canExplain;
   checkbox.setAttribute("type", "checkbox");
   checkbox.className = "canExplainCheckbox";
   checkbox.dataset.time = seconds;
+  checkbox.dataset.id = id;
   const marking = document.createElement("li");
   const time = document.createElement("p");
   time.className = "time";
@@ -236,6 +238,7 @@ function createMarking(value, seconds, canExplain) {
   }
   title.innerText = value;
   title.dataset.time = seconds;
+  title.dataset.id = id
   marking.appendChild(checkbox);
   marking.appendChild(time);
   marking.appendChild(title);
@@ -310,7 +313,8 @@ function updateMarkingsHtml() {
     const markingHtml = createMarking(
       marking.title,
       marking.time,
-      marking.canExplain
+      marking.canExplain,
+      marking.id
     );
     markingsHtml.appendChild(markingHtml);
   });
