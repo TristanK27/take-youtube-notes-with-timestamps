@@ -24,6 +24,7 @@ importNotes.addEventListener("change", (event) => {
       browser.storage.local.set(importJson);
     };
   }
+  location.reload();
 });
 
 exportBtn.addEventListener("mousedown", (event) => {
@@ -36,8 +37,12 @@ exportBtn.addEventListener("mousedown", (event) => {
     dlAnchorElem.click();
   });
 });
-importBtn.addEventListener("mousedown", (event) => {
-  importNotes.click();
+
+importBtn.addEventListener("mousedown", () => {
+  let confirmStatue = confirm("Current notes will get OVERWRITTEN by the content of the file.\nDo you want to continue?")
+  if (confirmStatue === true) {
+    importNotes.click();
+  }
 });
 
 copyBtn.addEventListener("mousedown", async () => {
@@ -79,7 +84,7 @@ markingsHtml.addEventListener("mousedown", (event) => {
           if (!shouldDelete) return;
           markings = markings.filter((marking) => marking.id != markingId);
         } else if (event.shiftKey) {
-          let newTitle = prompt("New title for: " + marking.title);
+          let newTitle = prompt("New title for: " + marking.title, marking.title);
           if (newTitle) {
             marking.title = newTitle;
           }
