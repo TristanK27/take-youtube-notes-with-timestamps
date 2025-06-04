@@ -320,7 +320,7 @@ function updateMarkingsHtml() {
     }
   });
   progressHtml.setAttribute("value", learnedNotes);
-  //progressContainer.appendChild(progressHtml);
+  progressContainer.appendChild(progressHtml);
   markingsHtml.innerHTML = "";
   markings.forEach((marking) => {
     const markingHtml = createMarking(
