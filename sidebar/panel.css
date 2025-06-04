@@ -35,6 +35,7 @@ button{
   background-color: transparent;
   border: 1px solid #9e9e9e;
   border-radius: 8px;
+  margin-top: 10px;
 }
 
 #markings {
@@ -53,4 +54,43 @@ progress{
 
 .dimmed{
   color: rgba(255, 255, 255, 0.5)
+}
+.textInput * {
+  position: relative;
+  float: left;
+}
+
+.textInput #currentMark {
+  width: 99%;
+}
+
+.importExportWindow {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+.importExportWindow.active {
+  max-height: 40px;
+}
+
+#dropdownData>p {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  top: 1px;
+  right: 5px;
+  border: 2px solid darkgrey;
+  border-radius: 4px;
+  color: black;
+  background-color: white;
+  rotate: 90deg;
+  transition: transform 0.2s ease-out;
+  z-index: 2;
+}
+
+#dropdownData.active>p {
+  background-color: darkgrey;
+  transform: rotate(-90deg) scale(0.8);
 }

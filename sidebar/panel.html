@@ -6,16 +6,22 @@
     <link rel="stylesheet" href="panel.css" />
   </head>
 
-  <body>
-    <div id="progressContainer"></div>
-    <input id="importNotes" type="file" hidden />
+
+<body>
+  <div id="progressContainer"></div>
+  <input id="importNotes" type="file" hidden />
+  <div class="textInput">
     <input type="text" id="currentMark" placeholder="Type your notes here:" />
-    <div>
+    <div id="dropdownData">
+      <p>&#9947</p>
+    </div>
+    <div class="importExportWindow">
       <button id="exportBtn" title="Export all notes to a file">Export</button>
       <button id="importBtn" title="Import notes from file (global)">Import</button>
       <button id="copyBtn" title="Copy notes to this video from another video">Copy</button>
     </div>
-    <ul id="markings"></ul>
-    <script src="panel.js"></script>
-  </body>
+  </div>
+  <ul id="markings"></ul>
+  <script src="panel.js"></script>
+</body>
 </html>

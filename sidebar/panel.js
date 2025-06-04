@@ -6,6 +6,8 @@ const importNotes = document.querySelector("#importNotes");
 const exportBtn = document.querySelector("#exportBtn");
 const importBtn = document.querySelector("#importBtn");
 const copyBtn = document.querySelector("#copyBtn");
+const dropdownHtml = document.getElementById('dropdownData');
+const exportWindow = document.getElementsByClassName('importExportWindow')[0];
 let markings = [];
 let previousInputLength = 0;
 const INVALID_START_TIME = -1;
@@ -14,6 +16,12 @@ let currentVideoTime;
 
 let previousTabId;
 let previousVideoId;
+
+dropdownHtml.addEventListener("mousedown", () => {
+  let visibilityClass = 'active';
+  exportWindow.classList.toggle(visibilityClass);
+  dropdownHtml.classList.toggle(visibilityClass);
+});
 
 importNotes.addEventListener("change", (event) => {
   if (importNotes.files.length == 1) {
