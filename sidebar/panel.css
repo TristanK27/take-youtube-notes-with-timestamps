@@ -62,6 +62,7 @@ progress{
 
 .textInput #currentMark {
   width: 99%;
+  padding-right: 30px;
 }
 
 .importExportWindow {
